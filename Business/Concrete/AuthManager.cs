@@ -27,8 +27,12 @@ namespace Business.Concrete
 
         public IDataResult<User> Login(UserLoginDto userLoginDto)
         {
-            var user = _userService.GetByEmail(userLoginDto.Email);
-            if (user == null)
+            var result = _userService.GetByEmail(userLoginDto.Email);
+            if (result.Success)
+            {
+                return null;
+            }
+            else
             {
                 return new ErrorDataResult<User>(Messages.UserNotFound);
             }
@@ -37,7 +41,7 @@ namespace Business.Concrete
 
         public IDataResult<User> Register(UserRegisterDto userRegisterDto)
         {
-            
+            throw new NotImplementedException();
         }
 
         public IResult UserExists(string email)
